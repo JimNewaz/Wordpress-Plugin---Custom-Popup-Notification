@@ -1,18 +1,25 @@
 .popup-modal {
     position: fixed;
-    width: 500px;
-    bottom: 25px;
-    right: 25px;
+    /* max-width: 515px; */
+    width: auto;
+    bottom: 20px;
+    left: 20px;
 	z-index:999;
     height: 100px;
-    display: flex; /* Use flexbox for layout */
-    align-items: center; /* Center vertically */
+    display: flex; 
+    align-items: center; 
+    border-radius:5px;
+    min-width: 350px;
+    font-size: 14px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, .4);
+    font: 300 12px / 1.5 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .popup-content {
     height: 100px;
-    padding: 10px;
+    padding: 25px;
     position: relative;		
+    align-items: center;
 }
 
 .close-button {
@@ -29,14 +36,31 @@
 }
 
 .popup-image{
+    width: auto;
+    max-width: 100px;
     height: 100px;
-    width: 100px;
+    max-height: 100px;
+    transform: translateZ(0);
+    border: 1px solid rgb(218, 218, 218);
 }
 
 .star-icon{
-    font-size: 30px;
+    font-size: 20px;    
+}
+.star-icons-margin{
+    margin-left: 25px;
 }
 
 .popup-content-font-size{
+    font-size: 14px;    
+}
+
+.popup-review{
     font-size: 14px;
+    font-weight: 700 !important;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
 }

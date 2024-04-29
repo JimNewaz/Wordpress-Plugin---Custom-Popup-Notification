@@ -85,11 +85,14 @@ function custom_display_popup() {
                         echo '<span class="close-button">&times;</span>'; 
                             echo '<div style="width:95%">';
                                 echo '<a href=" ' . $link . ' " target="_blank" style="text-decoration: none; color:black;"> 
-                                <span class="popup-content-font-size"><b>' . $name .  '</b>' . ' from  <b>' .$location. '</b> left a review in: <b>' . $product_name . '</b></span> <br>';
-                                for ($i = 0; $i < $stars; $i++) {
-                                    echo '<span class="star-icon" style="color:#FDF751">&#9733;</span>';
-                                }        
-                                echo '<p> "<b>' . $content . '</b>"</p>
+                                <span class="popup-content-font-size">
+                                    <b>' . $name .  '</b>' . ' from  <b>' .$location. '</b> left a review';
+                                    echo '<span class="star-icons-margin">';
+                                    for ($i = 0; $i < $stars; $i++) {
+                                        echo '<span class="star-icon" style="color:#FDF751">&#9733;</span></span>';
+                                    }        
+                                echo '</span>';
+                                echo '<p class="popup-review">' . $content . '</p>
                                 </a>';
                             echo '</div>';
                         echo '</div>';                
