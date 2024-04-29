@@ -1,6 +1,6 @@
 .popup-modal {
     position: fixed;
-    /* max-width: 515px; */
+    max-width: 600px;
     width: auto;
     bottom: 20px;
     left: 20px;
@@ -17,9 +17,12 @@
 
 .popup-content {
     height: 100px;
-    padding: 25px;
+    max-width: 580px;
+    padding: 20px;
     position: relative;		
     align-items: center;
+    background-color: #1981B2;
+    color: white;
 }
 
 .close-button {
@@ -56,6 +59,7 @@
 }
 
 .popup-review{
+    margin-top: 5px;
     font-size: 14px;
     font-weight: 700 !important;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
