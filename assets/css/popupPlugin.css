@@ -1,0 +1,42 @@
+.popup-modal {
+    position: fixed;
+    width: 500px;
+    bottom: 25px;
+    right: 25px;
+	z-index:999;
+    height: 100px;
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center vertically */
+}
+
+.popup-content {
+    height: 100px;
+    padding: 10px;
+    position: relative;		
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 25px;
+    cursor: pointer;
+    color: white;
+}
+
+.right {
+    flex-grow: 1; /* Allow content to expand to fill available space */
+}
+
+.popup-image{
+    height: 100px;
+    width: 100px;
+}
+
+.star-icon{
+    font-size: 30px;
+}
+
+.popup-content-font-size{
+    font-size: 14px;
+}
