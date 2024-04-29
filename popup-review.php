@@ -52,7 +52,7 @@ function custom_display_popup() {
     $args = array(
         'post_type' => 'popup',
         'posts_per_page' => 1,
-        'orderby' => 'rand',
+        'orderby' => 'desc',
     );
     $popups = new WP_Query( $args );
 
@@ -71,13 +71,14 @@ function custom_display_popup() {
             $image = get_field('product_image');
 
             // Customize the popup view
-                echo '<div class="popup-modal">'; 
+
+                echo '<div class="popup-modal" id="popupID" style="display:none">'; 
                     echo '<div class="left">';
                         echo '<a href=" ' . $link . ' " target="_blank">';
-                        // Image Here
-                        if ($image) {
-                            echo '<img class="popup-image" src="' . $image['url'] . '" alt="' . $image['alt'] . '">';
-                        }
+                            // Image Here
+                            if ($image) {
+                                echo '<img class="popup-image" src="' . $image['url'] . '" alt="' . $image['alt'] . '">';
+                            }
                         echo '</a>';
                     echo '</div>';
                     echo '<div class="right">';
@@ -85,7 +86,7 @@ function custom_display_popup() {
                         echo '<span class="close-button">&times;</span>'; 
                             echo '<div style="width:95%">';
                                 echo '<span class="popup-content-font-size">
-                                    <b>' . $name .  '</b>' . ' from  <b>' .$location. '</b> left a review';
+                                    <b>' . $name .  '</b>' . ' from  <b>' .$location. '</b>';
                                     echo '<span class="star-icons-margin">';
                                     for ($i = 0; $i < $stars; $i++) {
                                         echo '<span class="star-icon" style="color:#FDF751">&#9733;</span></span>';

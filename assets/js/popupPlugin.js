@@ -1,6 +1,7 @@
 jQuery(document).ready(function($) {
     $('.popup-modal').hide(); 
 
+    
     // Function to show the popup after a delay
     function showPopup() {
         $('.popup-modal').fadeIn(300); // Adjust the transition speed as needed
