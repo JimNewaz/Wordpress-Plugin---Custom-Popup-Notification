@@ -33,6 +33,64 @@ function enqueue_scripts()
 
 add_action('wp_enqueue_scripts', 'enqueue_scripts');
 
+
+function custom_plugin_settings_page()
+{
+    add_options_page( 
+        'Custom Plugin Settings',
+        'Custom Plugin',
+        'manage_options',
+        'custom-plugin-settings',
+        'custom_plugin_settings_callback'
+    );
+}
+add_action('admin_menu', 'custom_plugin_settings_page');
+
+// Change the interval and delay from the settings
+function custom_plugin_settings_callback() {
+    $popup_delay = get_option('custom_popup_delay', 20);
+    $popup_interval = get_option('custom_popup_interval', 60);
+    $popup_duration = get_option('custom_popup_duration', 20);
+    
+    ?>
+    <div class="wrap">
+        <h1>Custom Notification Popup Plugin Settings</h1>
+        <form method="post" action="options.php">
+            <?php
+            settings_fields('custom-plugin-settings');
+            do_settings_sections('custom-plugin-settings');
+            ?>
+            <table class="form-table">
+                <tr>
+                    <th scope="row"><label for="custom_popup_delay">Popup Delay (in seconds)</label> <br> <small>After reloading the page, it will take this time to appear.</small></th>
+                    <td><input type="number" id="custom_popup_delay" name="custom_popup_delay" value="<?php echo esc_attr($popup_delay); ?>" /></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="custom_popup_interval">Popup Interval (in seconds)</label> <br> <small>The time interval between each popup</small></th>
+                    <td><input type="number" id="custom_popup_interval" name="custom_popup_interval" value="<?php echo esc_attr($popup_interval); ?>" /></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="custom_popup_duration">Popup Duration (in seconds)</label> <br> <small>Set the duration of how long it will stay in the screen.</small></th>
+                    <td><input type="number" id="custom_popup_duration" name="custom_popup_duration" value="<?php echo esc_attr($popup_duration); ?>" /></td>
+                </tr>
+            </table>
+            <?php
+            submit_button();
+            ?>
+        </form>
+    </div>
+    <?php
+}
+
+// Save the interval and delay
+function custom_plugin_register_settings() {
+    register_setting('custom-plugin-settings', 'custom_popup_delay', 'intval');
+    register_setting('custom-plugin-settings', 'custom_popup_interval', 'intval');
+    register_setting('custom-plugin-settings', 'custom_popup_duration', 'intval');
+}
+add_action('admin_init', 'custom_plugin_register_settings');
+
+
 // Register the popup post type
 function custom_register_popup_post_type() {
     register_post_type( 'popup', array(
@@ -86,12 +144,12 @@ function custom_display_popup() {
                         echo '<span class="close-button">&times;</span>'; 
                             echo '<div style="width:95%">';
                                 echo '<span class="popup-content-font-size">
-                                    <b>' . $name .  '</b>' . ' from  <b>' .$location. '</b>';
+                                    <span style="font-weight:600">' . $name .  '</span>' . ' from  <span style="font-weight:600">' .$location. '</span>';
                                     echo '<span class="star-icons-margin">';
                                     for ($i = 0; $i < $stars; $i++) {
-                                        echo '<span class="star-icon" style="color:#FDF751">&#9733;</span></span>';
+                                        echo '<span class="star-icon" style="color:#FDF751">&#9733;</span>';
                                     }        
-                                echo '</span>';
+                                echo '</span> </span><br>';
                                 echo '<p class="popup-review">' . $content . '</p>';                                
                             echo '</div>';
                         echo '</div>';                
@@ -112,11 +170,14 @@ add_action( 'wp_footer', 'custom_display_popup' );
 // Schedule the popup display
 // Enqueue custom JavaScript file and pass ajaxurl
 function custom_schedule_popup() {
-    $popup_delay = 20000; 
-    $popup_interval = 60000; 
-
     wp_enqueue_script( 'custom-script', plugin_dir_url( __FILE__ ) . 'assets/js/popupPlugin.js', array( 'jquery' ), '1.0', true );
-    wp_localize_script( 'custom-script', 'custom_ajax_object', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+
+    wp_localize_script( 'custom-script', 'custom_ajax_object', array(
+        'ajaxurl' => admin_url( 'admin-ajax.php' ),
+        'popupDelay' => get_option( 'custom_popup_delay', 20 ),
+        'popupInterval' => get_option( 'custom_popup_interval', 60 ),
+        'popupDuration' => get_option( 'custom_popup_duration', 20 )
+    ) );
 
     wp_add_inline_script( 'custom-script', '
         jQuery(function($) {
@@ -129,13 +190,13 @@ function custom_schedule_popup() {
             }
 
             // Show the initial popup after the delay
-            setTimeout(showPopup, ' . $popup_delay . ');
+            setTimeout(showPopup, custom_ajax_object.popupDelay * 1000);
 
             // Schedule subsequent popups at intervals
             setInterval(function() {
                 showPopup();
-                setTimeout(hidePopup, ' . $popup_delay . ');
-            }, ' . $popup_interval . ');
+                setTimeout(hidePopup, custom_ajax_object.popupDuration * 1000);
+            }, custom_ajax_object.popupInterval * 1000);
         });
     ' );
 }
