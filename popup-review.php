@@ -137,7 +137,7 @@ function custom_display_popup() {
             // Customize the popup view
             $popup_content .= '<div class="popup-modal" id="popupID-' . $popup_id . '" style="display:none">'; 
             $popup_content .= '<div class="left">';
-            $popup_content .= '<a href="' . $link . '" target="_blank">';
+            $popup_content .= '<a href="' . $link . '" >';
             // Image Here
             if ($image) {
                 $popup_content .= '<img class="popup-image" src="' . $image['url'] . '" alt="' . $image['alt'] . '">';
@@ -194,7 +194,7 @@ function custom_schedule_popup() {
     wp_add_inline_script( 
         'custom-script', 
         'jQuery(function($) {
-            console.log(custom_ajax_object.ajaxurl);
+            
             function showPopup() {
                 $(".popup").fadeIn(300); 
             }
