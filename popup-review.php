@@ -110,8 +110,8 @@ function custom_display_popup() {
     $args = array(
         'post_type' => 'popup',
         'posts_per_page' => 1,
-        'orderby' => 'id',
-        'order' => 'rand'
+        'orderby' => 'rand',
+        // 'order' => 'rand'
     );
     
     $popups = new WP_Query( $args );
@@ -120,7 +120,7 @@ function custom_display_popup() {
     $count = $popups->found_posts;
 
     if ( $popups->have_posts() ) {
-        echo 'Number of Popups: ' . $popups->found_posts . '<br>';
+        // echo 'Number of Popups: ' . $popups->found_posts . '<br>';
         while ( $popups->have_posts() ) {
             $popups->the_post();
             $popup_id = get_the_ID();

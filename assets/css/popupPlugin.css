@@ -10,7 +10,7 @@
     align-items: center; 
     border-radius:5px;
     font-size: 14px;
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, .4);
+    box-shadow: 0 0 4px 0 rgba(216, 216, 216, 0.4);
     font: 300 12px / 1.5 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
@@ -25,7 +25,9 @@
     position: relative;		
     align-items: center;
     background-color: #92DCB5;
-    color: black;
+    color: rgb(12, 12, 12);
+    line-height: 25px;
+    font-size: 14px;
 }
 
 .close-button {
@@ -58,12 +60,13 @@
 }
 
 .popup-content-font-size{
-    font-size: 16px;    
+    font-size: 14px;    
+    line-height: 1.8;
 }
 
 .popup-review{
     margin-top: 10px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600 !important;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     overflow: hidden;
