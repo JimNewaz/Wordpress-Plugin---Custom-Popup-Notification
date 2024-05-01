@@ -43,38 +43,87 @@
 // });
 
 
+// jQuery(document).ready(function($) {
+//     $('.popup-modal').hide();
+
+//     // Function to show the popup after a delay
+//     function showPopup() {
+//         $('.popup-modal').fadeIn(300); // Adjust the transition speed as needed
+//     }
+
+//     // Function to hide the popup after a delay
+//     function hidePopup() {
+//         $('.popup-modal').fadeOut(300); // Adjust the transition speed as needed
+//     }
+
+//     // Show the popup after the specified delay
+//     setTimeout(showPopup, custom_ajax_object.popupDelay * 1000); // Multiply by 1000 to convert seconds to milliseconds
+
+//     // Function to handle subsequent popups after intervals
+//     function schedulePopup() {
+//         setTimeout(function() {
+//             showPopup();
+//             setTimeout(function() {
+//                 hidePopup();
+//                 schedulePopup(); 
+//             }, custom_ajax_object.popupInterval * 1000); // Multiply by 1000 to convert seconds to milliseconds
+//         }, custom_ajax_object.popupDelay * 1000); // Multiply by 1000 to convert seconds to milliseconds
+//     }
+
+//     // Call the schedulePopup function to start the sequence
+//     schedulePopup();
+
+//     // Hide the popup on close button click
+//     $('.close-button').click(function() {
+//         hidePopup();
+//     });
+// });
+
+
 jQuery(document).ready(function($) {
     $('.popup-modal').hide();
+    var popups = $('.popup-modal');
+    var popupDelay = custom_ajax_object.popupDelay * 1000; 
+    var popupDuration = custom_ajax_object.popupDuration * 1000; 
+    var popupInterval = custom_ajax_object.popupInterval * 1000; 
+    var currentIndex = 0;
 
-    // Function to show the popup after a delay
-    function showPopup() {
-        $('.popup-modal').fadeIn(300); // Adjust the transition speed as needed
-    }
+    function showPopup(index) {
+        if (currentIndex === popups.length) {
+            $('.popup-modal').fadeOut(300);
+            return;
+        }
 
-    // Function to hide the popup after a delay
-    function hidePopup() {
-        $('.popup-modal').fadeOut(300); // Adjust the transition speed as needed
-    }
+      
+        $('.popup-modal').fadeOut(300);
 
-    // Show the popup after the specified delay
-    setTimeout(showPopup, custom_ajax_object.popupDelay * 1000); // Multiply by 1000 to convert seconds to milliseconds
+        
+        popups.eq(index).fadeIn(300);
 
-    // Function to handle subsequent popups after intervals
-    function schedulePopup() {
+        
         setTimeout(function() {
-            showPopup();
-            setTimeout(function() {
-                hidePopup();
-                schedulePopup(); 
-            }, custom_ajax_object.popupInterval * 1000); // Multiply by 1000 to convert seconds to milliseconds
-        }, custom_ajax_object.popupDelay * 1000); // Multiply by 1000 to convert seconds to milliseconds
+          
+            popups.eq(index).fadeOut(300);
+
+           
+            currentIndex++;
+
+           
+            if (currentIndex < popups.length) {
+                setTimeout(function() {
+                    showPopup(currentIndex);
+                }, popupInterval);
+            }
+        }, popupDuration);
     }
 
-    // Call the schedulePopup function to start the sequence
-    schedulePopup();
-
-    // Hide the popup on close button click
+   
+    setTimeout(function() {
+        showPopup(currentIndex);
+    }, popupDelay);
+    
+    
     $('.close-button').click(function() {
-        hidePopup();
+        $('.popup-modal').hide();
     });
 });

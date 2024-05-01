@@ -109,7 +109,7 @@ add_action( 'init', 'custom_register_popup_post_type' );
 function custom_display_popup() {
     $args = array(
         'post_type' => 'popup',
-        'posts_per_page' => 1,
+        //'posts_per_page' => 1,
         'orderby' => 'rand',
         // 'order' => 'rand'
     );
@@ -135,7 +135,7 @@ function custom_display_popup() {
             $image = get_field('product_image');
 
             // Customize the popup view
-            $popup_content .= '<div class="popup-modal" id="popupID-' . $popup_id . '" >'; 
+            $popup_content .= '<div class="popup-modal" id="popupID-' . $popup_id . '" style="display:none">'; 
             $popup_content .= '<div class="left">';
             $popup_content .= '<a href="' . $link . '" target="_blank">';
             // Image Here
