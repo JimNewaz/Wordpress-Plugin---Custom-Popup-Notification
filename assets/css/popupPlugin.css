@@ -1,6 +1,6 @@
 .popup-modal {
     position: fixed;
-    max-width: 600px;
+    max-width: 515px;
     min-width: 450px;
     bottom: 20px;
     left: 20px;
@@ -17,7 +17,7 @@
 .popup-content {
     min-width: 450px;
     height: 100px;
-    max-width: 580px;
+    max-width: 450px;
     padding-top: 10px;
     padding-right: 20px;
     padding-bottom: 10px;
