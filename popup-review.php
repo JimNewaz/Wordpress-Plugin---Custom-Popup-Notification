@@ -148,6 +148,7 @@ function custom_display_popup() {
             $popup_content .= '<div class="popup-content">';
             $popup_content .= '<span class="close-button">&times;</span>'; 
             $popup_content .= '<div style="width:95%">';
+            $popup_content .= '<a class="customhref" href="' . $link . '" >';
             $popup_content .= '<span class="popup-content-font-size">';
             $popup_content .= '<span style="font-weight:600">' . $name . '</span> from <span style="font-weight:600">' .$location. '</span>';
             $popup_content .= '<span class="star-icons-margin">';
@@ -157,6 +158,7 @@ function custom_display_popup() {
             $popup_content .= '</span> </span><br>';
             $popup_content .= '<p class="popup-review">' . $content . '</p>';                                
             $popup_content .= '</div>';
+            $popup_content .= '</a>';
             $popup_content .= '</div>';                
             $popup_content .= '</div>';                
             $popup_content .= '</div>';

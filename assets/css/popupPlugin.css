@@ -74,3 +74,13 @@
     white-space: nowrap;
     max-width: 100%;
 }
+
+.customhref{
+    text-decoration: none;
+    color: rgb(12, 12, 12);
+}
+
+.customhref:hover{
+    /* text-decoration: none; */
+    color: rgb(12, 12, 12);
+}
