@@ -28,7 +28,7 @@ function enqueue_scripts()
     wp_enqueue_script('bootstrap-bundle', 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js', array(), '5.0.2', true);
 
     // Enqueue custom JavaScript file
-    wp_enqueue_script('custom-js', plugin_dir_url(__FILE__) . 'assets/js/popupPlugin.js', array('jquery'), '1.0', true);
+    wp_enqueue_script('custom-script', plugin_dir_url(__FILE__) . 'assets/js/popupPlugin.js', array('jquery'), '1.0', true);
 }
 
 add_action('wp_enqueue_scripts', 'enqueue_scripts');
@@ -70,7 +70,7 @@ function custom_plugin_settings_callback() {
                     <td><input type="number" id="custom_popup_interval" name="custom_popup_interval" value="<?php echo esc_attr($popup_interval); ?>" /></td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="custom_popup_duration">Popup Duration (in seconds)</label> <br> <small>Set the duration of how long it will stay in the screen.</small></th>
+                    <th scope="row"><label for="custom_popup_duration">Popup Duration (in seconds)</label> <br> <small>Set the duration of how long it will stay on the screen.</small></th>
                     <td><input type="number" id="custom_popup_duration" name="custom_popup_duration" value="<?php echo esc_attr($popup_duration); ?>" /></td>
                 </tr>
             </table>
@@ -110,11 +110,17 @@ function custom_display_popup() {
     $args = array(
         'post_type' => 'popup',
         'posts_per_page' => 1,
-        'orderby' => 'desc',
+        'orderby' => 'id',
+        'order' => 'rand'
     );
+    
     $popups = new WP_Query( $args );
+    
+    $popup_content = '';
+    $count = $popups->found_posts;
 
     if ( $popups->have_posts() ) {
+        echo 'Number of Popups: ' . $popups->found_posts . '<br>';
         while ( $popups->have_posts() ) {
             $popups->the_post();
             $popup_id = get_the_ID();
@@ -129,58 +135,66 @@ function custom_display_popup() {
             $image = get_field('product_image');
 
             // Customize the popup view
+            $popup_content .= '<div class="popup-modal" id="popupID-' . $popup_id . '" >'; 
+            $popup_content .= '<div class="left">';
+            $popup_content .= '<a href="' . $link . '" target="_blank">';
+            // Image Here
+            if ($image) {
+                $popup_content .= '<img class="popup-image" src="' . $image['url'] . '" alt="' . $image['alt'] . '">';
+            }
+            $popup_content .= '</a>';
+            $popup_content .= '</div>';
+            $popup_content .= '<div class="right">';
+            $popup_content .= '<div class="popup-content">';
+            $popup_content .= '<span class="close-button">&times;</span>'; 
+            $popup_content .= '<div style="width:95%">';
+            $popup_content .= '<span class="popup-content-font-size">';
+            $popup_content .= '<span style="font-weight:600">' . $name . '</span> from <span style="font-weight:600">' .$location. '</span>';
+            $popup_content .= '<span class="star-icons-margin">';
+            for ($i = 0; $i < $stars; $i++) {
+                $popup_content .= '<span class="star-icon" style="color:#FDF751">&#9733;</span>';
+            }        
+            $popup_content .= '</span> </span><br>';
+            $popup_content .= '<p class="popup-review">' . $content . '</p>';                                
+            $popup_content .= '</div>';
+            $popup_content .= '</div>';                
+            $popup_content .= '</div>';                
+            $popup_content .= '</div>';
 
-                echo '<div class="popup-modal" id="popupID" style="display:none">'; 
-                    echo '<div class="left">';
-                        echo '<a href=" ' . $link . ' " target="_blank">';
-                            // Image Here
-                            if ($image) {
-                                echo '<img class="popup-image" src="' . $image['url'] . '" alt="' . $image['alt'] . '">';
-                            }
-                        echo '</a>';
-                    echo '</div>';
-                    echo '<div class="right">';
-                        echo '<div class="popup-content">';
-                        echo '<span class="close-button">&times;</span>'; 
-                            echo '<div style="width:95%">';
-                                echo '<span class="popup-content-font-size">
-                                    <span style="font-weight:600">' . $name .  '</span>' . ' from  <span style="font-weight:600">' .$location. '</span>';
-                                    echo '<span class="star-icons-margin">';
-                                    for ($i = 0; $i < $stars; $i++) {
-                                        echo '<span class="star-icon" style="color:#FDF751">&#9733;</span>';
-                                    }        
-                                echo '</span> </span><br>';
-                                echo '<p class="popup-review">' . $content . '</p>';                                
-                            echo '</div>';
-                        echo '</div>';                
-                    echo '</div>';                
-                echo '</div>';
-
-            
-
-            // echo '<a href="' . $link . '"></a>';
             // Mark the popup as displayed
             update_post_meta( $popup_id, 'displayed', true );
-        }
+            
+            
+        }       
+        
+    }else {
+        echo 'No popups found.';
     }
+    
     wp_reset_postdata();
+    echo $popup_content;
 }
 add_action( 'wp_footer', 'custom_display_popup' );
 
 // Schedule the popup display
-// Enqueue custom JavaScript file and pass ajaxurl
 function custom_schedule_popup() {
-    wp_enqueue_script( 'custom-script', plugin_dir_url( __FILE__ ) . 'assets/js/popupPlugin.js', array( 'jquery' ), '1.0', true );
+    // wp_enqueue_script( 'custom-script', plugin_dir_url( __FILE__ ) . 'assets/js/popupPlugin.js', array( 'jquery' ), '1.0', true );
 
-    wp_localize_script( 'custom-script', 'custom_ajax_object', array(
-        'ajaxurl' => admin_url( 'admin-ajax.php' ),
-        'popupDelay' => get_option( 'custom_popup_delay', 20 ),
-        'popupInterval' => get_option( 'custom_popup_interval', 60 ),
-        'popupDuration' => get_option( 'custom_popup_duration', 20 )
-    ) );
+    wp_localize_script( 
+        'custom-script', 
+        'custom_ajax_object', 
+        array(
+            'ajaxurl' => admin_url( 'admin-ajax.php' ),
+            'popupDelay' => get_option( 'custom_popup_delay', 20 ),
+            'popupInterval' => get_option( 'custom_popup_interval', 60 ),
+            'popupDuration' => get_option( 'custom_popup_duration', 20 )
+        ) 
+    );
 
-    wp_add_inline_script( 'custom-script', '
-        jQuery(function($) {
+    wp_add_inline_script( 
+        'custom-script', 
+        'jQuery(function($) {
+            console.log(custom_ajax_object.ajaxurl);
             function showPopup() {
                 $(".popup").fadeIn(300); 
             }
@@ -188,11 +202,10 @@ function custom_schedule_popup() {
             function hidePopup() {
                 $(".popup").fadeOut(300); 
             }
-
-            // Show the initial popup after the delay
+            
             setTimeout(showPopup, custom_ajax_object.popupDelay * 1000);
 
-            // Schedule subsequent popups at intervals
+            // intervals
             setInterval(function() {
                 showPopup();
                 setTimeout(hidePopup, custom_ajax_object.popupDuration * 1000);
