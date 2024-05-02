@@ -207,11 +207,11 @@ function custom_schedule_popup() {
         'jQuery(function($) {
             
             function showPopup() {
-                $(".popup").fadeIn(300); 
+                $(".popup").fadeIn(1000); 
             }
 
             function hidePopup() {
-                $(".popup").fadeOut(300); 
+                $(".popup").fadeOut(1000); 
             }
             
             setTimeout(showPopup, custom_ajax_object.popupDelay * 1000);

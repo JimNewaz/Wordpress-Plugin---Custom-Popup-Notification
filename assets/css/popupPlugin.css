@@ -92,6 +92,9 @@
 
 /* For screens smaller than 600px (typical smartphones) */
 @media only screen and (max-width: 600px) {
+	body{
+		overflow-x:hidden;
+	}
     .popup-modal {
         min-width: 100%;
         max-width: 100%;
@@ -101,17 +104,17 @@
         border-radius: 0;
         box-shadow: none;
         height: 100px;
-        overflow: hidden;
+        overflow-x: hidden;
     }
 
     .popup-content {
-        min-width: 90%;
-        width: 90%;
-        max-width: 90%;
+        min-width: 320px;
+        width: 100%;
+        max-width: 320px;
         padding: 5px;
         font-size: 14px;
         height: 100px;
-				overflow:hidden;
+				overflow-x:hidden;
     }
 
     .popup-image {
@@ -154,5 +157,7 @@
 
     
 }
+
+
 
 

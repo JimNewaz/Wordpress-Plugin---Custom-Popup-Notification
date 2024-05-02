@@ -95,15 +95,15 @@ jQuery(document).ready(function($) {
         }
 
       
-        $('.popup-modal').fadeOut(300);
+        $('.popup-modal').fadeOut(1000);
 
         
-        popups.eq(index).fadeIn(300);
+        popups.eq(index).fadeIn(1000);
 
         
         setTimeout(function() {
           
-            popups.eq(index).fadeOut(300);
+            popups.eq(index).fadeOut(1000);
 
            
             currentIndex++;
