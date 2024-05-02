@@ -1,7 +1,7 @@
 .popup-modal {
     position: fixed;
-    max-width: 515px;
-    min-width: 450px;
+    max-width: 600px;
+    min-width: 500px;
     bottom: 20px;
     left: 20px;
 	z-index:999;
@@ -9,29 +9,29 @@
     display: flex; 
     align-items: center; 
     border-radius:5px;
-    font-size: 14px;
     box-shadow: 0 0 4px 0 rgba(216, 216, 216, 0.4);
     font: 300 12px / 1.5 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .popup-content {
-    min-width: 450px;
+    min-width: 500px;
     height: 100px;
-    max-width: 450px;
+    max-width: 600px;
     padding-top: 10px;
     padding-right: 20px;
     padding-bottom: 10px;
     padding-left: 20px;
     position: relative;		
     align-items: center;
-    /* background-color: #92DCB5; */
-    background-image: url('http://notification-plugin.test/wp-content/uploads/2024/05/bg_orange.png');
+    background-image: url('http://notification-plugin.test/wp-content/uploads/2024/05/6013a709-c3a4-49ae-8071-7c503b434d58-scaled.jpg');
     background-size: cover; 
     background-position: center;
     background-repeat: no-repeat;
     color: rgb(12, 12, 12);
-    line-height: 25px;
-    font-size: 14px;
+    line-height: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .close-button {
@@ -57,7 +57,7 @@
 }
 
 .star-icon{
-    font-size: 20px;   
+    font-size: 25px;   
     color:  #ffc35c !important; 
 }
 .star-icons-margin{
@@ -65,7 +65,7 @@
 }
 
 .popup-content-font-size{
-    font-size: 14px;    
+    font-size: 18px;    
     line-height: 1.8;
 }
 
