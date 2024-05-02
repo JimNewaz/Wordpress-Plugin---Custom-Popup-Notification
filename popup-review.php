@@ -156,7 +156,6 @@ function custom_display_popup() {
             if (!empty($link)) {
                 $popup_content .= '<a class="customhref" href="' . $link . '" >';
             }
-            // $popup_content .= '<a class="customhref" href="' . $link . '" >';
             $popup_content .= '<span class="popup-content-font-size">';
             $popup_content .= '<span style="font-weight:600">' . $name . '</span> from <span style="font-weight:600">' .$location. '</span> left a review';
             $popup_content .= '<span class="star-icons-margin">';
