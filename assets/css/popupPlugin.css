@@ -11,7 +11,7 @@
     bottom: 20px;
     left: 20px;
     z-index: 999;
-    height: 100px;
+    height: auto;
     align-items: center;
     background-image: url('https://www.read123.co.uk/wp-content/uploads/2024/05/6013a709-c3a4-49ae-8071-7c503b434d58-scaled.jpg');
     background-size: cover;
@@ -25,6 +25,7 @@
     display: flex;
     flex-wrap: wrap;
     width:100%;
+    height: auto;
 }
 
 .left {

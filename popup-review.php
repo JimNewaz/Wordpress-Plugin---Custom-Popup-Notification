@@ -179,7 +179,10 @@ function custom_display_popup() {
                         if (!empty($link)) {
                             $popup_content .= '<a class="customhref" href="' . $link . '" >';
                         }
-                        $popup_content .= '<img class="popup-image" src="' . $image['url'] . '" alt="' . $image['alt'] . '">';
+                        if($image){
+                            $popup_content .= '<img class="popup-image" src="' . $image['url'] . '" alt="' . $image['alt'] . '">';
+                        }
+                        
 
                         if (!empty($link)) {
                             $popup_content .= '</a>';
