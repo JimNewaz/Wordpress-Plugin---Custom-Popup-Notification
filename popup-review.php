@@ -135,47 +135,92 @@ function custom_display_popup() {
             $image = get_field('product_image');
             
             // Customize the popup view
-            $popup_content .= '<div class="popup-modal" id="popupID-' . $popup_id . '" style="display:none">'; 
-            $popup_content .= '<div class="left">';
+            // $popup_content .= '<div class="popup-modal" id="popupID-' . $popup_id . '" style="display:none">'; 
+            // $popup_content .= '<div class="left">';
             
-            if (!empty($link)) {
-                $popup_content .= '<a class="customhref" href="' . $link . '" >';                
-            }            
-            if ($image) {
-                $popup_content .= '<img class="popup-image" src="' . $image['url'] . '" alt="' . $image['alt'] . '">';
-            }
-            if (!empty($link)) {
-                $popup_content .= '</a>';
-            }
+            // if (!empty($link)) {
+            //     $popup_content .= '<a class="customhref" href="' . $link . '" >';                
+            // }            
+            // if ($image) {
+            //     $popup_content .= '<img class="popup-image" src="' . $image['url'] . '" alt="' . $image['alt'] . '">';
+            // }
+            // if (!empty($link)) {
+            //     $popup_content .= '</a>';
+            // }
             
-            $popup_content .= '</div>';
-            $popup_content .= '<div class="right">';
-            $popup_content .= '<div class="popup-content">';
-            $popup_content .= '<span class="close-button">&times; </span>'; 
-            $popup_content .= '<div style="width:95%">';
-            if (!empty($link)) {
-                $popup_content .= '<a class="customhref" href="' . $link . '" >';
-            }
-            $popup_content .= '<span class="popup-content-font-size">';
-            $popup_content .= '<span style="font-weight:600">' . $name . '</span> from <span style="font-weight:600">' .$location. '</span> left a review';
-            $popup_content .= '<span class="star-icons-margin">';
-            for ($i = 0; $i < $stars; $i++) {
-                $popup_content .= '<span class="star-icon" style="color: #FFA205;">&#9733;</span>';
-            }        
-            $popup_content .= '</span> </span><br>';
-            $popup_content .= '<p class="popup-review">' . $content . '</p>';                                
-            $popup_content .= '</div>';
-            if (!empty($link)) {
-                $popup_content .= '</a>';
-            }
-            $popup_content .= '</div>';                
-            $popup_content .= '</div>';                
+            // $popup_content .= '</div>';
+            // $popup_content .= '<div class="right">';
+            // $popup_content .= '<div class="popup-content">';
+            // $popup_content .= '<span class="close-button">&times; </span>'; 
+            // $popup_content .= '<div style="width:95%">';
+            // if (!empty($link)) {
+            //     $popup_content .= '<a class="customhref" href="' . $link . '" >';
+            // }
+            // $popup_content .= '<span class="popup-content-font-size">';
+            // $popup_content .= '<span style="font-weight:600">' . $name . '</span> from <span style="font-weight:600">' .$location. '</span> left a review';
+            // $popup_content .= '<span class="star-icons-margin">';
+            // for ($i = 0; $i < $stars; $i++) {
+            //     $popup_content .= '<span class="star-icon" style="color: #FFA205;">&#9733;</span>';
+            // }        
+            // $popup_content .= '</span> </span><br>';
+            // $popup_content .= '<p class="popup-review">' . $content . '</p>';                                
+            // $popup_content .= '</div>';
+            // if (!empty($link)) {
+            //     $popup_content .= '</a>';
+            // }
+            // $popup_content .= '</div>';                
+            // $popup_content .= '</div>';                
+            // $popup_content .= '</div>';
+
+
+            $popup_content = '<div class="popup-modal" id="popupID-' . $popup_id . '" style="display:none">';
+                $popup_content .= '<div class="popup-content">';
+                    $popup_content .= '<div class="left">';
+                        if (!empty($link)) {
+                            $popup_content .= '<a class="customhref" href="' . $link . '" >';
+                        }
+                        $popup_content .= '<img class="popup-image" src="' . $image['url'] . '" alt="' . $image['alt'] . '">';
+
+                        if (!empty($link)) {
+                            $popup_content .= '</a>';
+                        }
+                    $popup_content .= '</div>';
+
+                    $popup_content .= '<div class="right">';
+                        $popup_content .= '<span class="close-button">&times; </span>'; 
+
+                        if (!empty($link)) {
+                            $popup_content .= '<a class="customhref" href="' . $link . '" >';
+                        }
+
+                        $popup_content .= '<div class="name-location-stars">';
+                            $popup_content .= '<span class="name">' .$name . '</span>'; 
+                            $popup_content .= ' from <span class="location">' .$location. '</span>'; 
+                            $popup_content .= '<span class=""> left a review </span>'; 
+                            $popup_content .= '<span class="star-icons-margin">';
+                            for ($i = 0; $i < $stars; $i++) {
+                                $popup_content .= '<span class="star-icon">&#9733;</span>';
+                            }        
+                            $popup_content .= '</span>';
+                        $popup_content .= '<div>';
+
+                        if (!empty($link)) {
+                            $popup_content .= '</a>';
+                        }
+
+                        $popup_content .= '<div class="review">';
+                            $popup_content .=  '<div class="content">';
+                                $popup_content .= '<span class="popup-review">' . $content . '</span>';
+                            $popup_content .= '</div>';
+                        $popup_content .= '</div>';
+                    $popup_content .= '</div>';
+                    $popup_content .= '</div>';
+                    $popup_content .= '</div>';
+                $popup_content .= '</div>';
             $popup_content .= '</div>';
 
             // Mark the popup as displayed
             update_post_meta( $popup_id, 'displayed', true );
-            
-            
         }       
         
     }else {
