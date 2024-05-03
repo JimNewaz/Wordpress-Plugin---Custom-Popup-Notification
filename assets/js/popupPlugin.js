@@ -1,3 +1,4 @@
+
 jQuery(document).ready(function ($) {
     $('.popup-modal').hide();
     var popups = $('.popup-modal');
@@ -7,7 +8,6 @@ jQuery(document).ready(function ($) {
     var currentIndex = 0;
 
     function showPopup(index) {
-
         $('.popup-modal').fadeOut(1000);
 
         popups.eq(index).fadeIn(1000);
@@ -17,11 +17,10 @@ jQuery(document).ready(function ($) {
             popups.eq(index).fadeOut(1000);
             currentIndex++;
 
-            if (currentIndex < popups.length) {
-                setTimeout(function () {
-                    showPopup(currentIndex);
-                }, popupInterval);
-            }
+            setTimeout(function () {
+                showPopup(currentIndex % popups.length);
+            }, popupInterval);
+
         }, popupDuration);
     }
 
