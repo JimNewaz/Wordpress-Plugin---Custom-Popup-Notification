@@ -7,10 +7,6 @@ jQuery(document).ready(function ($) {
     var currentIndex = 0;
 
     function showPopup(index) {
-        if (currentIndex === popups.length) {
-            $('.popup-modal').fadeOut(1000);
-            return;
-        }
 
         $('.popup-modal').fadeOut(1000);
 
