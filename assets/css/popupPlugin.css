@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: column;
     max-width: 550px;
+    min-width: 550px;
     position: fixed;
     box-sizing: border-box;
     bottom: 20px;
@@ -23,6 +24,7 @@
 .popup-content {
     display: flex;
     flex-wrap: wrap;
+    width:100%;
 }
 
 .left {
@@ -124,10 +126,12 @@
         /* Let height adjust dynamically */
         align-items: stretch;
         /* Ensure items stretch to fill container */
+        min-width: auto;
     }
 
     .popup-content {
         flex-direction: row;
+        width: 100%;
     }
 
     .left {
@@ -156,7 +160,7 @@
     }
 
     .star-icons-margin{
-        margin-left: 5px;
+        margin-left: 0px;
         font-size: 20px;
     }
 
@@ -171,4 +175,8 @@
         border-top-left-radius:5px;
         border-bottom-left-radius: 5px;
     }
+
+    .review{
+		margin-top:-5px;
+	}
 }
