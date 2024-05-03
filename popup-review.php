@@ -118,7 +118,7 @@ function custom_display_popup() {
     
     $popup_content = '';
     $count = $popups->found_posts;
-
+    $popup_content = '';
     if ( $popups->have_posts() ) {
         // echo 'Number of Popups: ' . $popups->found_posts . '<br>';
         while ( $popups->have_posts() ) {
@@ -173,7 +173,7 @@ function custom_display_popup() {
             // $popup_content .= '</div>';
 
 
-            $popup_content = '<div class="popup-modal" id="popupID-' . $popup_id . '" style="display:none">';
+            $popup_content .= '<div class="popup-modal" id="popupID-' . $popup_id . '" style="display:none">';
                 $popup_content .= '<div class="popup-content">';
                     $popup_content .= '<div class="left">';
                         if (!empty($link)) {
